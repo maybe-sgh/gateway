@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: springcloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+
+server:
+  port: 6666
+  connection-timeout: 30000
+  tomcat:
+    max-connections: 200
+    max-threads: 200
+    min-spare-threads: 50
+  undertow:
+    io-threads: 16
+    worker-threads: 256
+    buffer-size: 1024
+    buffers-per-region: 1024
+    direct-buffers: true
+eureka:
+  instance:
+    preferIpAddress: true #在注册中心显示ip
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}        # 将Instance ID设置成IP:端口的形式
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@eureka:8888/eureka/,http://admin:admin@eureka2:8888/eureka/
+
